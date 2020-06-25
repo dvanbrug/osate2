@@ -308,10 +308,11 @@ public class FlowLatencyUtil {
 	 */
 	public static ComponentInstance getPartition(ComponentInstance componentInstance) {
 		Collection<ComponentInstance> vprocessors = InstanceModelUtil.getBoundVirtualProcessors(componentInstance);
-		for (ComponentInstance vproc : vprocessors) {
-			return vproc;
+		if (!vprocessors.isEmpty()) {
+			return vprocessors.iterator().next();
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	/**
@@ -512,7 +513,7 @@ public class FlowLatencyUtil {
 		}
 		double diff = targetLatency - (processingLatency % targetLatency);
 		// deal with overflow into next frame.
-		int extraslots = targetLatency == 0 ? 0 : (int) (processingLatency / targetLatency);
+		int extraslots = (int) (processingLatency / targetLatency);
 		return diff + (extraslots * samplingLatency);
 	}
 
