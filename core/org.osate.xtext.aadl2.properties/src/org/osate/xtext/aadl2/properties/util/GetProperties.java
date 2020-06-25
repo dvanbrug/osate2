@@ -1342,10 +1342,11 @@ public class GetProperties {
 			Property schedulingprotocol = lookupPropertyDefinition(ne, DeploymentProperties._NAME,
 					DeploymentProperties.SCHEDULING_PROTOCOL);
 			List<? extends PropertyExpression> propertyValues = ne.getPropertyValueList(schedulingprotocol);
-			for (PropertyExpression propertyExpression : propertyValues) {
-				return ((EnumerationLiteral) ((NamedValue) propertyExpression).getNamedValue()).getName();
+			if (!propertyValues.isEmpty()) {
+				return ((EnumerationLiteral) ((NamedValue) propertyValues.iterator().next()).getNamedValue()).getName();
+			} else {
+				return null;
 			}
-			return null;
 		} catch (PropertyLookupException e) {
 			return null;
 		}
@@ -1372,10 +1373,11 @@ public class GetProperties {
 			Property concurrencyControlProtocol = lookupPropertyDefinition(ne, ThreadProperties._NAME,
 					DeploymentProperties.CONCURRENCY_CONTROL_PROTOCOL);
 			List<? extends PropertyExpression> propertyValues = ne.getPropertyValueList(concurrencyControlProtocol);
-			for (PropertyExpression propertyExpression : propertyValues) {
-				return ((EnumerationLiteral) ((NamedValue) propertyExpression).getNamedValue()).getName();
+			if (!propertyValues.isEmpty()) {
+				return ((EnumerationLiteral) ((NamedValue) propertyValues.iterator().next()).getNamedValue()).getName();
+			} else {
+				return null;
 			}
-			return null;
 		} catch (PropertyLookupException e) {
 			return null;
 		}
