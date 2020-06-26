@@ -122,12 +122,9 @@ public class GetProperties {
 			if (pacc.getAssociations().size() > 0) {
 				ModalPropertyValue mdv = pacc.getAssociations().get(0).getOwnedValues().get(0);
 				PropertyExpression pe = mdv.getOwnedValue();
-//				System.out.println("pe=" + pe);
 				StringLiteral sl = (StringLiteral) pe;
 				return sl.getValue();
-
 			}
-//			System.out.println("pacc" + pacc.getAssociations().get(0).getOwnedValues().get(0));
 			return null;
 		} catch (PropertyLookupException e) {
 			return null;
@@ -142,7 +139,6 @@ public class GetProperties {
 
 			List<? extends PropertyExpression> propertyValues = ne.getPropertyValueList(st);
 			for (PropertyExpression propertyExpression : propertyValues) {
-//				System.out.println("pe=" + propertyExpression);
 				StringLiteral sl = (StringLiteral) propertyExpression;
 				res.add(sl.getValue());
 			}
@@ -161,7 +157,6 @@ public class GetProperties {
 
 			List<? extends PropertyExpression> propertyValues = ne.getPropertyValueList(st);
 			for (PropertyExpression propertyExpression : propertyValues) {
-//				System.out.println("pe=" + propertyExpression);
 				StringLiteral sl = (StringLiteral) propertyExpression;
 				res.add(sl.getValue());
 			}
@@ -310,7 +305,7 @@ public class GetProperties {
 
 	public static UnitLiteral findUnitLiteral(Element context, String unitsType, String literal) {
 		PropertyType pt = lookupPropertyType(context, unitsType);
-		if (pt == null || !(pt instanceof UnitsType)) {
+		if (!(pt instanceof UnitsType)) {
 			return null;
 		}
 		return (UnitLiteral) ((UnitsType) pt).findNamedElement(literal);
@@ -322,7 +317,7 @@ public class GetProperties {
 
 	public static EnumerationLiteral findEnumerationLiteral(Element context, String enumerationType, String literal) {
 		PropertyType pt = lookupPropertyType(context, enumerationType);
-		if (pt == null || !(pt instanceof EnumerationType)) {
+		if (!(pt instanceof EnumerationType)) {
 			return null;
 		}
 		return (EnumerationLiteral) ((EnumerationType) pt).findNamedElement(literal);
